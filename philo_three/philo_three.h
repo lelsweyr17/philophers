@@ -1,10 +1,13 @@
-#ifndef PHILO_ONE_H
-# define PHILO_ONE_H
+#ifndef PHILO_THREE_H
+# define PHILO_THREE_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
 # include <stdio.h>
+# include <semaphore.h>
+# include <fcntl.h> 
+# include <sys/stat.h> 
 # include <sys/time.h>
 
 # define FORK		"has taken a fork\n"
@@ -31,6 +34,16 @@ typedef struct s_time
 	long int		finish_time;
 }	t_time;
 
+typedef struct s_monitor
+{
+	pthread_t		spy;
+	int				dead;
+	long int		*last_meal;
+	long int		current_time;
+	int				full_philo;
+	sem_t	        *write;
+}	t_monitor;
+
 typedef struct s_philo
 {
 	int	nbr_of_philos;
@@ -50,21 +63,10 @@ typedef struct s_one
 	t_time			*get_time;
 	t_philo			*philo;
 	pthread_t		*t;
-	pthread_mutex_t	*write;
-	pthread_mutex_t	*fork_right;
-	pthread_mutex_t	*fork_left;
-	pthread_mutex_t	*take_forks;
+	sem_t	        *write;
+	sem_t	        *fork;
+	sem_t			*take_forks;
 }	t_one;
-
-typedef struct s_monitor
-{
-	pthread_t		spy;
-	int				dead;
-	long int		*last_meal;
-	long int		current_time;
-	int				full_philo;
-	pthread_mutex_t	*write;
-}	t_monitor;
 
 typedef struct s_all
 {
@@ -73,9 +75,9 @@ typedef struct s_all
 	t_one			*one;
 	t_time			*time;
 	pthread_t		*t;
-	pthread_mutex_t	index;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	*take_forks;
+	sem_t	        *index;
+	sem_t	        *fork;
+	sem_t			*take_forks;
 	t_monitor		*monitor;
 }	t_all;
 
@@ -83,7 +85,7 @@ typedef struct s_all
 int		validation(int argc, char **argv);
 
 /* INITIALISATION */
-void	mutex_init(t_all *all);
+void	semaphore_init(t_all *all);
 void	init_struct_each_philo(t_all *all);
 void	init_params(t_philo *philo, char **argv);
 

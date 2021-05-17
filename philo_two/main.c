@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo_two.h"
 
 int	main(int argc, char **argv)
 {
@@ -14,9 +14,12 @@ int	main(int argc, char **argv)
 	init_params(all->philo, argv);
 	if (!get_heap_memory(&all) || !get_start_time(&all))
 		return (0);
-	mutex_init(all);
+	semaphore_init(all);
 	init_struct_each_philo(all);
 	create_threads(all);
+    // sem_close(all->fork);
+    // sem_close(all->monitor->write);
+    // sem_close(all->index);
 	free_all(all);
 	return (0);
 }

@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo_three.h"
 
 int	get_start_time(t_all **all)
 {

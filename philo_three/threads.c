@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo_three.h"
 
 void	*life_cycle(void *all)
 {
@@ -6,10 +6,10 @@ void	*life_cycle(void *all)
 	int		index;
 
 	tmp = all;
-	pthread_mutex_lock(&tmp->index);
+	sem_wait(tmp->index);
 	index = tmp->i;
 	tmp->i++;
-	pthread_mutex_unlock(&tmp->index);
+	sem_post(tmp->index);
 	tmp->one[index].last_meal = 0;
 	while (tmp->one[index].nbr_of_eats < tmp->philo->nbr_of_eats || tmp->philo->nbr_of_eats == -1)
 	{

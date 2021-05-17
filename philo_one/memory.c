@@ -20,9 +20,9 @@ int	get_heap_memory(t_all **all)
 	sizeof(pthread_t));
 	(*all)->monitor = (t_monitor *)malloc(sizeof(t_monitor));
 	(*all)->monitor->write = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	(*all)->monitor->last_eat = (long int *)malloc((*all)->philo->nbr_of_philos * sizeof(long int));
+	(*all)->monitor->last_meal = (long int *)malloc((*all)->philo->nbr_of_philos * sizeof(long int));
 	if (!(*all)->time || !(*all)->fork || !(*all)->one || !(*all)->t || \
-	!(*all)->monitor || !(*all)->monitor->write || 	!(*all)->monitor->last_eat)
+	!(*all)->monitor || !(*all)->monitor->write || 	!(*all)->monitor->last_meal)
 		return (0);
 	return (1);
 }
@@ -35,7 +35,7 @@ void	free_all(t_all *all)
 	free(all->one);
 	free(all->t);
 	free(all->monitor->write);
-	free(all->monitor->last_eat);
+	free(all->monitor->last_meal);
 	free(all->monitor);
 	free(all);
 }
