@@ -16,10 +16,7 @@ int	main(int argc, char **argv)
 		return (0);
 	semaphore_init(all);
 	init_struct_each_philo(all);
-	create_threads(all);
-    // sem_close(all->fork);
-    // sem_close(all->monitor->write);
-    // sem_close(all->index);
+	create_processes(all);
 	free_all(all);
 	return (0);
 }

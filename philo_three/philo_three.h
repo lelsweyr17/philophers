@@ -9,6 +9,7 @@
 # include <fcntl.h> 
 # include <sys/stat.h> 
 # include <sys/time.h>
+# include <signal.h>
 
 # define FORK		"has taken a fork\n"
 # define EAT		"is eating\n"
@@ -25,6 +26,11 @@
 # define RESET		"\x1b[0m"
 # define BOLD_FONT	"\e[1m"
 # define RESET_BOLD	"\e[0m"
+
+# define STATUS_FULL 0
+# define STATUS_DEAD 1
+# define PTHR_ERROR 3
+# define FORK_ERROR 4
 
 typedef struct s_time
 {
@@ -78,6 +84,7 @@ typedef struct s_all
 	sem_t	        *index;
 	sem_t	        *fork;
 	sem_t			*take_forks;
+	sem_t			full_philos;
 	t_monitor		*monitor;
 }	t_all;
 
@@ -94,7 +101,8 @@ int		get_memory_for_struct(t_all **all);
 int		get_heap_memory(t_all **all);
 void	free_all(t_all *all);
 
-/* THREADS */
+/* THREADS AND PROCESSES */
+void	create_processes(t_all *all);
 int		create_threads(t_all *all);
 
 /* LIFE CYCLE */
@@ -117,5 +125,6 @@ int		ft_atoi(char *str);
 /* MONITOR */
 void	my_usleep(long int time_in_usec);
 void	*philo_spy(void *all);
+void	*philo_died(t_all *tmp, int i);
 
 #endif

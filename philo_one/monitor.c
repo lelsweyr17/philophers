@@ -21,6 +21,7 @@ void	my_usleep(long int time_in_usec)
 
 void	*philo_died(t_all *tmp, int i)
 {
+	pthread_mutex_lock(tmp->monitor->write);
 	tmp->monitor->dead = 1;
 	printf(BOLD_FONT "%ld\t" RESET_BOLD, tmp->monitor->current_time);
 	printf(CYAN "philo " BOLD_FONT "№%d\t" RESET_BOLD RESET, tmp->one[i].i + 1);
@@ -38,7 +39,7 @@ void	*philo_spy(void *all)
 	while (1)
 	{
 		i = -1;
-		pthread_mutex_lock(tmp->monitor->write);
+		// pthread_mutex_lock(tmp->monitor->write);
 		gettimeofday(&tmp->time->tv2, NULL);
 		tmp->monitor->current_time = tmp->one->get_time->tv2.tv_sec * 1000 \
 		+ tmp->one->get_time->tv2.tv_usec / 1000 - tmp->time->start_time;
@@ -59,7 +60,7 @@ void	*philo_spy(void *all)
 			tmp->philo->time_to_die)
 				return (philo_died(tmp, i));
 		}
-		pthread_mutex_unlock(tmp->monitor->write);
+		// pthread_mutex_unlock(tmp->monitor->write);
 		my_usleep(1000);
 	}
 	return (NULL);

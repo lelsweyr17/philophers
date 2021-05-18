@@ -2,9 +2,6 @@
 
 void	semaphore_init(t_all *all)
 {
-	int	i;
-
-	i = -1;
 	sem_unlink("forks");
 	all->fork = sem_open("forks", O_CREAT, 0666, all->philo->nbr_of_philos);
 	sem_unlink("take_2_forks");

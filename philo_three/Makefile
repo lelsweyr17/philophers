@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -pthread
 SOURCES = main.c \
 	ft_atoi.c \
 	ft_strlen.c \
@@ -8,11 +8,12 @@ SOURCES = main.c \
 	memory.c \
 	monitor.c \
 	threads.c \
+	processes.c \
 	time.c \
 	validation.c
 OBJECTS = $(SOURCES:.c=.o)
-HEADERS = philo_two.h
-NAME = philo_two
+HEADERS = philo_three.h
+NAME = philo_three
 
 .PHONY: all clean fclean re
 
