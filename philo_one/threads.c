@@ -17,7 +17,6 @@ void	*life_cycle(void *all)
 		eating(&tmp->one[index]);
 		if (tmp->one[index].nbr_of_eats == tmp->philo->nbr_of_eats)
 		{
-			printf("here\n");
 			tmp->monitor->full_philo++;
 			break ;
 		}
