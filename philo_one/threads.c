@@ -4,11 +4,13 @@ void	*life_cycle(void *all)
 {
 	t_all	*tmp;
 	int		index;
+	int		i;
 
 	tmp = all;
 	pthread_mutex_lock(&tmp->index);
 	index = tmp->i;
 	tmp->i++;
+	i = -1;
 	pthread_mutex_unlock(&tmp->index);
 	tmp->one[index].last_meal = 0;
 	while (tmp->one[index].nbr_of_eats < tmp->philo->nbr_of_eats || \
