@@ -11,7 +11,8 @@ void	*life_cycle(void *all)
 	tmp->i++;
 	sem_post(tmp->index);
 	tmp->one[index].last_meal = 0;
-	while (tmp->one[index].nbr_of_eats < tmp->philo->nbr_of_eats || tmp->philo->nbr_of_eats == -1)
+	while (tmp->one[index].nbr_of_eats < tmp->philo->nbr_of_eats || \
+	tmp->philo->nbr_of_eats == -1)
 	{
 		eating(&tmp->one[index]);
 		if (tmp->one[index].nbr_of_eats == tmp->philo->nbr_of_eats)
@@ -27,7 +28,9 @@ void	*life_cycle(void *all)
 
 int	create_threads(t_all *all)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	all->i = 0;
 	while (i < all->philo->nbr_of_philos)
 	{

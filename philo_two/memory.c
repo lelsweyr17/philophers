@@ -17,7 +17,8 @@ int	get_heap_memory(t_all **all)
 	(*all)->monitor = (t_monitor *)malloc(sizeof(t_monitor));
 	(*all)->monitor->last_meal = (long int *)malloc((*all)->philo->nbr_of_philos \
 	* sizeof(long int));
-	if (!(*all)->time || !(*all)->one || !(*all)->monitor || !(*all)->monitor->last_meal)
+	if (!(*all)->time || !(*all)->one || !(*all)->monitor || \
+	!(*all)->monitor->last_meal)
 		return (0);
 	return (1);
 }

@@ -8,7 +8,8 @@ void	*life_cycle(void *all)
 	tmp = all;
 	index = tmp->i;
 	tmp->one[index].last_meal = 0;
-	while (tmp->one[index].nbr_of_eats < tmp->philo->nbr_of_eats || tmp->philo->nbr_of_eats == -1)
+	while (tmp->one[index].nbr_of_eats < tmp->philo->nbr_of_eats || \
+	tmp->philo->nbr_of_eats == -1)
 	{
 		eating(&tmp->one[index]);
 		if (tmp->one[index].nbr_of_eats == tmp->philo->nbr_of_eats)

@@ -4,7 +4,7 @@ void	waitpid_processes(pid_t *pid, t_all *all)
 {
 	int		status;
 	int		i;
-	
+
 	i = 0;
 	waitpid(0, &status, WUNTRACED);
 	if ((status >> 8) == STATUS_DEAD)

@@ -5,6 +5,7 @@ SOURCES = main.c \
 	ft_strlen.c \
 	initialisation.c \
 	life_cycle.c \
+	forks.c \
 	memory.c \
 	monitor.c \
 	threads.c \

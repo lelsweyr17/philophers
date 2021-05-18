@@ -30,6 +30,13 @@ void	*philo_died(t_all *tmp, int i)
 	return ((void *)1);
 }
 
+void	*philo_full(t_all *tmp)
+{
+	pthread_mutex_lock(tmp->monitor->write);
+	printf(BOLD_FONT RED "PHILOS ARE FULL\n" RESET RESET_BOLD);
+	return ((void *)1);
+}
+
 void	*philo_spy(void *all)
 {
 	t_all		*tmp;
@@ -39,28 +46,18 @@ void	*philo_spy(void *all)
 	while (1)
 	{
 		i = -1;
-		// pthread_mutex_lock(tmp->monitor->write);
 		gettimeofday(&tmp->time->tv2, NULL);
 		tmp->monitor->current_time = tmp->one->get_time->tv2.tv_sec * 1000 \
 		+ tmp->one->get_time->tv2.tv_usec / 1000 - tmp->time->start_time;
 		while (++i < tmp->philo->nbr_of_philos)
 		{
-			if (tmp->philo->nbr_of_eats != -1)
-			{
-				if (tmp->philo->nbr_of_eats == tmp->one[i].nbr_of_eats && \
-				tmp->monitor->full_philo < tmp->philo->nbr_of_philos)
-					continue ;
-				else if (tmp->monitor->full_philo == tmp->philo->nbr_of_philos)
-				{
-					printf(BOLD_FONT RED "PHILOS ARE FULL\n" RESET RESET_BOLD);
-					return ((void *)1);
-				}
-			}
-			else if (!tmp->one[i].eating && (tmp->monitor->current_time - tmp->one[i].last_meal) >= \
-			tmp->philo->time_to_die)
+			if (tmp->philo->nbr_of_eats != -1 && \
+			tmp->monitor->full_philo == tmp->philo->nbr_of_philos)
+				return (philo_full(all));
+			else if (!tmp->one[i].eating && (tmp->monitor->current_time - \
+			tmp->one[i].last_meal) >= tmp->philo->time_to_die)
 				return (philo_died(tmp, i));
 		}
-		// pthread_mutex_unlock(tmp->monitor->write);
 		my_usleep(1000);
 	}
 	return (NULL);

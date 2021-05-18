@@ -21,10 +21,10 @@ void	init_struct_each_philo(t_all *all)
 	while (++i < all->philo->nbr_of_philos)
 	{
 		all->one[i].i = i;
-		if (i != 0)
+		if (i < (all->philo->nbr_of_philos - 1))
 		{
-			all->one[i].fork_right = &all->fork[i - 1];
-			all->one[i].fork_left = &all->fork[i];
+			all->one[i].fork_right = &all->fork[i];
+			all->one[i].fork_left = &all->fork[i + 1];
 		}
 		else
 		{

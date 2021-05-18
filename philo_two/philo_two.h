@@ -22,6 +22,7 @@
 # define BLUE		"\x1b[34m"
 # define MAGENTA	"\x1b[35m"
 # define CYAN		"\x1b[36m"
+# define WHITE		"\x1b[37m"
 # define RESET		"\x1b[0m"
 # define BOLD_FONT	"\e[1m"
 # define RESET_BOLD	"\e[0m"
@@ -41,7 +42,7 @@ typedef struct s_monitor
 	long int		*last_meal;
 	long int		current_time;
 	int				full_philo;
-	sem_t	        *write;
+	sem_t			*write;
 }	t_monitor;
 
 typedef struct s_philo
@@ -63,8 +64,8 @@ typedef struct s_one
 	t_time			*get_time;
 	t_philo			*philo;
 	pthread_t		*t;
-	sem_t	        *write;
-	sem_t	        *fork;
+	sem_t			*write;
+	sem_t			*fork;
 	sem_t			*take_forks;
 }	t_one;
 
@@ -75,8 +76,8 @@ typedef struct s_all
 	t_one			*one;
 	t_time			*time;
 	pthread_t		*t;
-	sem_t	        *index;
-	sem_t	        *fork;
+	sem_t			*index;
+	sem_t			*fork;
 	sem_t			*take_forks;
 	t_monitor		*monitor;
 }	t_all;
@@ -109,6 +110,8 @@ int		get_time_of_action(t_one *one);
 void	eating(t_one *one);
 void	sleeping(t_one *one);
 void	thinking(t_one *one);
+void	take_a_fork(t_one *one);
+void	put_a_fork(t_one *one);
 
 /* UTILS */
 int		ft_strlen(char *str);

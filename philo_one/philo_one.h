@@ -19,6 +19,7 @@
 # define BLUE		"\x1b[34m"
 # define MAGENTA	"\x1b[35m"
 # define CYAN		"\x1b[36m"
+# define WHITE		"\x1b[37m"
 # define RESET		"\x1b[0m"
 # define BOLD_FONT	"\e[1m"
 # define RESET_BOLD	"\e[0m"
@@ -107,6 +108,8 @@ int		get_time_of_action(t_one *one);
 void	eating(t_one *one);
 void	sleeping(t_one *one);
 void	thinking(t_one *one);
+void	take_a_fork(t_one *one);
+void	put_a_fork(t_one *one);
 
 /* UTILS */
 int		ft_strlen(char *str);
