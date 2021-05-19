@@ -5,7 +5,7 @@ void	take_a_fork(t_one *one)
 	int	index;
 
 	index = one->i;
-	if ((one->philo->nbr_of_philos % 2 && !(index % 2)) || index % 2)
+	if (index % 2)
 	{
 		pthread_mutex_lock(one->fork_right);
 		write_function(one, YELLOW FORK RESET);

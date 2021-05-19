@@ -51,11 +51,13 @@ void	*philo_spy(void *all)
 		+ tmp->one->get_time->tv2.tv_usec / 1000 - tmp->time->start_time;
 		while (++i < tmp->philo->nbr_of_philos)
 		{
-			if (tmp->philo->nbr_of_eats != -1 && \
-			tmp->monitor->full_philo == tmp->philo->nbr_of_philos)
-				return (philo_full(all));
+			if (tmp->philo->nbr_of_eats != -1)
+			{
+				if (tmp->monitor->full_philo == tmp->philo->nbr_of_philos)
+					return (philo_full(all));
+			}
 			else if (!tmp->one[i].eating && (tmp->monitor->current_time - \
-			tmp->one[i].last_meal) >= tmp->philo->time_to_die)
+			tmp->one[i].last_meal) > tmp->philo->time_to_die)
 				return (philo_died(tmp, i));
 		}
 		my_usleep(1000);

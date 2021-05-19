@@ -42,7 +42,7 @@ void	*philo_spy(void *all)
 		tmp->monitor->current_time = tmp->one->get_time->tv2.tv_sec * 1000 \
 		+ tmp->one->get_time->tv2.tv_usec / 1000 - tmp->time->start_time;
 		if (!tmp->one[tmp->i].eating && (tmp->monitor->current_time - \
-		tmp->one[tmp->i].last_meal) >= tmp->philo->time_to_die)
+		tmp->one[tmp->i].last_meal) > tmp->philo->time_to_die)
 			philo_died(tmp, tmp->i);
 		my_usleep(1000);
 	}

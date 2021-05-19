@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread
 SOURCES = main.c \
 	ft_atoi.c \
 	ft_strlen.c \

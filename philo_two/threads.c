@@ -36,7 +36,7 @@ int	create_threads(t_all *all)
 	{
 		if (pthread_create(&all->t[i], NULL, life_cycle, all) != 0)
 			return (1);
-		pthread_detach(all->t[all->i]);
+		pthread_detach(all->t[i]);
 		i++;
 	}
 	if (pthread_create(&all->monitor->spy, NULL, philo_spy, all) != 0)

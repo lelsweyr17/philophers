@@ -54,7 +54,6 @@ typedef struct s_one
 	pthread_mutex_t	*write;
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
-	pthread_mutex_t	*take_forks;
 }	t_one;
 
 typedef struct s_monitor
@@ -76,7 +75,6 @@ typedef struct s_all
 	pthread_t		*t;
 	pthread_mutex_t	index;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	*take_forks;
 	t_monitor		*monitor;
 }	t_all;
 

@@ -1,29 +1,18 @@
 #include "philo_one.h"
 
-void	*life_cycle(void *all)
+void	*life_cycle(void *one1)
 {
-	t_all	*tmp;
-	int		index;
-	int		i;
+	t_one	*one;
 
-	tmp = all;
-	pthread_mutex_lock(&tmp->index);
-	index = tmp->i;
-	tmp->i++;
-	i = -1;
-	pthread_mutex_unlock(&tmp->index);
-	tmp->one[index].last_meal = 0;
-	while (tmp->one[index].nbr_of_eats < tmp->philo->nbr_of_eats || \
-	tmp->philo->nbr_of_eats == -1)
+	one = one1;
+	one->last_meal = 0;
+	while (1)
 	{
-		eating(&tmp->one[index]);
-		if (tmp->one[index].nbr_of_eats == tmp->philo->nbr_of_eats)
-		{
-			tmp->monitor->full_philo++;
+		eating(one);
+		if (one->nbr_of_eats == one->philo->nbr_of_eats)
 			break ;
-		}
-		sleeping(&tmp->one[index]);
-		thinking(&tmp->one[index]);
+		sleeping(one);
+		thinking(one);
 	}
 	return (NULL);
 }
@@ -36,9 +25,10 @@ int	create_threads(t_all *all)
 	all->i = 0;
 	while (i < all->philo->nbr_of_philos)
 	{
-		if (pthread_create(&all->t[i], NULL, life_cycle, all) != 0)
+		all->one[i].i = i;
+		if (pthread_create(&all->t[i], NULL, life_cycle, &all->one[i]) != 0)
 			return (1);
-		pthread_detach(all->t[all->i]);
+		pthread_detach(all->t[i]);
 		i++;
 	}
 	if (pthread_create(&all->monitor->spy, NULL, philo_spy, all) != 0)

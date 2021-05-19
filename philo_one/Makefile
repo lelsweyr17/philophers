@@ -31,7 +31,5 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
-test: all clean
-
 re: fclean all
 

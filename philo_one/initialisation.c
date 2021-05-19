@@ -21,16 +21,8 @@ void	init_struct_each_philo(t_all *all)
 	while (++i < all->philo->nbr_of_philos)
 	{
 		all->one[i].i = i;
-		if (i < (all->philo->nbr_of_philos - 1))
-		{
-			all->one[i].fork_right = &all->fork[i];
-			all->one[i].fork_left = &all->fork[i + 1];
-		}
-		else
-		{
-			all->one[i].fork_right = &all->fork[all->philo->nbr_of_philos - 1];
-			all->one[i].fork_left = &all->fork[0];
-		}
+		all->one[i].fork_right = &all->fork[i];
+		all->one[i].fork_left = &all->fork[(i + 1) % all->philo->nbr_of_philos];
 		all->one[i].t = &all->t[i];
 		all->one[i].get_time = all->time;
 		all->one[i].philo = all->philo;
