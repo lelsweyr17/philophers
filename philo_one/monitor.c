@@ -30,11 +30,23 @@ void	*philo_died(t_all *tmp, int i)
 	return ((void *)1);
 }
 
-void	*philo_full(t_all *tmp)
+int	philo_full(t_all *tmp)
 {
 	pthread_mutex_lock(tmp->monitor->write);
 	printf(BOLD_FONT RED "PHILOS ARE FULL\n" RESET RESET_BOLD);
-	return ((void *)1);
+	return (1);
+}
+
+int	full_philos_counter(t_all *tmp, int i)
+{
+	if (tmp->one[i].nbr_of_eats == tmp->philo->nbr_of_eats)
+	{
+		tmp->monitor->full_philo++;
+		tmp->one[i].nbr_of_eats++;
+	}
+	else if (tmp->monitor->full_philo == tmp->philo->nbr_of_philos)
+		return (philo_full(tmp));
+	return (0);
 }
 
 void	*philo_spy(void *all)
@@ -53,13 +65,8 @@ void	*philo_spy(void *all)
 		{
 			if (tmp->philo->nbr_of_eats != -1)
 			{
-				if (tmp->one[i].nbr_of_eats == tmp->philo->nbr_of_eats)
-				{
-					tmp->monitor->full_philo++;
-					tmp->one[i].nbr_of_eats++;
-				}
-				else if (tmp->monitor->full_philo == tmp->philo->nbr_of_philos)
-					return (philo_full(all));
+				if (full_philos_counter(tmp, i))
+					return ((void *)1);
 			}
 			if (!tmp->one[i].eating && (tmp->monitor->current_time - \
 			tmp->one[i].last_meal) > tmp->philo->time_to_die)
