@@ -5,14 +5,14 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void    ft_putstr(char *s)
+void	ft_putstr(char *s)
 {
-    write(1, s, ft_strlen(s));
+	write(1, s, ft_strlen(s));
 }
 
-void    ft_putnbr(long nb)
+void	ft_putnbr(long nb)
 {
-    if (nb < 0)
+	if (nb < 0)
 	{
 		nb = -nb;
 		ft_putchar('-');
