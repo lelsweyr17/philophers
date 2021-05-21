@@ -23,17 +23,19 @@ void	*philo_died(t_all *tmp, int i)
 {
 	pthread_mutex_lock(tmp->monitor->write);
 	tmp->monitor->dead = 1;
-	printf(BOLD_FONT "%ld\t" RESET_BOLD, tmp->monitor->current_time);
-	printf(CYAN "philo " BOLD_FONT "№%d\t" RESET_BOLD RESET, tmp->one[i].i + 1);
-	printf("%s", RED DIED RESET);
-	printf(BOLD_FONT RED "END OF SIMULATION\n" RESET RESET_BOLD);
+	ft_putnbr(tmp->monitor->current_time);
+	ft_putchar('\t');
+	ft_putnbr(tmp->one[i].i + 1);
+	ft_putchar('\t');
+	ft_putstr(DIED);
+	ft_putstr("END OF SIMULATION: ONE PHILO IS DIED\n");
 	return ((void *)1);
 }
 
 int	philo_full(t_all *tmp)
 {
 	pthread_mutex_lock(tmp->monitor->write);
-	printf(BOLD_FONT RED "PHILOS ARE FULL\n" RESET RESET_BOLD);
+	ft_putstr("END OF SIMULATION: PHILOS ARE FULL\n");
 	return (1);
 }
 

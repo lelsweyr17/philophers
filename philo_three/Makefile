@@ -11,6 +11,7 @@ SOURCES = main.c \
 	threads.c \
 	processes.c \
 	time.c \
+	utils.c \
 	validation.c
 OBJECTS = $(SOURCES:.c=.o)
 HEADERS = philo_three.h

@@ -16,7 +16,7 @@ void	waitpid_processes(pid_t *pid, t_all *all)
 	{
 		all->i++;
 		if (all->i == all->philo->nbr_of_philos)
-			printf(BOLD_FONT RED "PHILOS ARE FULL\n" RESET RESET_BOLD);
+			ft_putstr("END OF SIMULATION: PHILOS ARE FULL\n");
 		else
 			waitpid_processes(pid, all);
 	}

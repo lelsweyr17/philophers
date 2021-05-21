@@ -116,6 +116,9 @@ void	put_a_fork(t_one *one);
 /* UTILS */
 int		ft_strlen(char *str);
 int		ft_atoi(char *str);
+void	ft_putstr(char *s);
+void	ft_putnbr(long nb);
+void	ft_putchar(char c);
 
 /* MONITOR */
 void	my_usleep(long int time_in_usec);
